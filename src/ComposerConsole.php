@@ -26,7 +26,7 @@ class ComposerConsole extends Client
     protected function download($editionId)
     {
         $progressBar = new ProgressBar((new ConsoleOutput()), 100);
-        $progressBar->setFormat("  - Downloading $editionId: [%bar%] %percent:3s%%");
+        $progressBar->setFormat("  - Upgrading $editionId: [%bar%] %percent:3s%%");
         $progressBar->setRedrawFrequency(1);
         $progressBar->start();
         $progressBarFinish = false;
