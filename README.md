@@ -187,3 +187,5 @@ COPYRIGHT AND LICENSE
 This software is Copyright (c) 2021 by Andrey Tronov.
 
 This is free software, licensed under the MIT License.
+
+![](https://mc.yandex.ru/watch/86814846)
