@@ -25,12 +25,14 @@ composer require tronovav/geoip2-update
 CONFIGURATION
 -------------
 
-### 1. Updating databases via Composer
+### 1. Updating databases via Composer.
 
 **1.1. Use in-line configuration options:**
 
 To update Geoip2 databases via Composer, you can set up an update call in your `composer.json`.
 Each time the `composer update` command is invoked, the library will check for updates on the "maxmind.com" server and update the Geoip2 databases if necessary.
+You can also update only `GeoIP2` databases without updating all project dependencies:
+`composer update tronovav/geoip2-update`.
 
 ```json
 # composer.json
@@ -56,8 +58,8 @@ Just add the `"post-update-cmd": "tronovav\\GeoIP2Update\\ComposerClient::run"` 
 Parameters in the `extra` section:
 
 - `license_key` **(required)** - You can see your license key information on [your account License Keys page](https://support.maxmind.com/account-faq/license-keys/where-do-i-find-my-license-key/) at maxmind.com.
-- `dir` **(required)** - Absolute path to the Geoip2 local database storage directory. Or you can alias part of the path relative to your composer.json. For example `@composer/path-to-db-storage`.
-  The script itself will find the absolute path to the `composer.json` file in your project and the `path-to-db-storage` directory for storing Geoip2 databases relative to `composer.json`.
+- `dir` **(required)** - Absolute path to the `Geoip2` local database storage directory. Or you can alias part of the path relative to your composer.json. For example `@composer/path-to-db-storage`.
+  The script itself will find the absolute path to the `composer.json` file in your project and the `path-to-db-storage` directory for storing `Geoip2` databases relative to `composer.json`.
   You can also specify `@composer/../path-to-db-storage`. The main thing is that you yourself understand which path to storing the database you specify.
 - `editions` - List of database editions that you want to update. Maxmind.com offers databases for free download: `GeoLite2-ASN`, `GeoLite2-City`, `GeoLite2-Country`,` GeoLite2-ASN-CSV`, `GeoLite2-City-CSV`,` GeoLite2-Country-CSV`. If you do not specify the `editions` parameter, then the databases will be updated:` GeoLite2-ASN`, `GeoLite2-City`,` GeoLite2-Country`. Otherwise, only the editions that you specified will be updated. See available editions in [your maxmind.com account](https://www.maxmind.com/en/accounts/current/geoip/downloads/).
 
@@ -85,12 +87,14 @@ The configuration file format fully complies with the recommendations of maxmind
 
 Parameters in the `extra` section:
 
-- `dir` **(required)** - Absolute path to the Geoip2 local database storage directory. Or you can alias part of the path relative to your composer.json. For example `@composer/path-to-db-storage`.
-  The script itself will find the absolute path to the `composer.json` file in your project and the `path-to-db-storage` directory for storing Geoip2 databases relative to `composer.json`.
+- `dir` **(required)** - Absolute path to the `Geoip2` local database storage directory. Or you can alias part of the path relative to your composer.json. For example `@composer/path-to-db-storage`.
+  The script itself will find the absolute path to the `composer.json` file in your project and the `path-to-db-storage` directory for storing `Geoip2` databases relative to `composer.json`.
   You can also specify `@composer/../path-to-db-storage` or another path relative to your file` composer.json`.
 - `geoipConfFile` **(required)** - The absolute path to the configuration file. Or you can alias part of the path relative to your composer.json. For example `@composer/../GeoIP.conf`.
 
-### 2. Updating databases from your php application
+### 2. Updating databases from your php application.
+
+You can use this option to update `GeoIP2` databases from your project, or use `Cron` on Linux, or use `Task Scheduler` on Windows.
 
 **2.1. Use in-line configuration options:**
 
@@ -112,7 +116,7 @@ $client->run();
 Params:
 
 - `license_key` **(required)** - You can see your license key information on [your account License Keys page](https://support.maxmind.com/account-faq/license-keys/where-do-i-find-my-license-key/) at maxmind.com.
-- `dir` **(required)** - Absolute path to the local storage of Geoip2 databases.
+- `dir` **(required)** - Absolute path to the local storage of `Geoip2` databases.
 - `editions` - List of database editions that you want to update. Maxmind.com offers databases for free download: `GeoLite2-ASN`, `GeoLite2-City`, `GeoLite2-Country`,` GeoLite2-ASN-CSV`, `GeoLite2-City-CSV`,` GeoLite2-Country-CSV`. If you do not specify the `editions` parameter, then the databases will be updated:` GeoLite2-ASN`, `GeoLite2-City`,` GeoLite2-Country`. Otherwise, only the editions that you specified will be updated. See available editions in [your maxmind.com account](https://www.maxmind.com/en/accounts/current/geoip/downloads/).
 
 **2.2. Use `GeoIP.conf` file:**
@@ -138,7 +142,7 @@ $client->run();
 
 Params:
 
-- `dir` **(required)** - Absolute path to the local storage of Geoip2 databases.
+- `dir` **(required)** - Absolute path to the local storage of `Geoip2` databases.
 - `geoipConfFile` **(required)** - The absolute path to the configuration file.
 
 After the update, you can get information about the result, if you need it:
@@ -187,5 +191,3 @@ COPYRIGHT AND LICENSE
 This software is Copyright (c) 2021 by Andrey Tronov.
 
 This is free software, licensed under the MIT License.
-
-![](https://mc.yandex.ru/watch/86814846)
