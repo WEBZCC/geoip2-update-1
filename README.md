@@ -27,12 +27,12 @@ CONFIGURATION
 
 ### 1. Updating databases via Composer.
 
-**1.1. Use in-line configuration options:**
-
 To update Geoip2 databases via Composer, you can set up an update call in your `composer.json`.
 Each time the `composer update` command is invoked, the library will check for updates on the "maxmind.com" server and update the Geoip2 databases if necessary.
 You can also update only `GeoIP2` databases without updating all project dependencies:
 `composer update tronovav/geoip2-update`.
+
+**1.1. Use in-line configuration options:**
 
 ```json
 # composer.json
