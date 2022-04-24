@@ -115,23 +115,27 @@ class Client
 
     protected function setConfParams(&$params)
     {
-        if (array_key_exists('geoipConfFile', $params) && is_file($params['geoipConfFile']) && is_readable($params['geoipConfFile'])) {
-            $confParams = array();
-            foreach (file($params['geoipConfFile']) as $line) {
-                $confString = trim($line);
-                if (preg_match('/^\s*(?P<name>LicenseKey|EditionIDs)\s+(?P<value>([\w-]+\s*)+)$/', $confString, $matches)) {
-                    $confParams[$matches['name']] = $matches['name'] === 'EditionIDs'
-                        ? array_values(array_filter(explode(' ', $matches['value']), function ($val) {
-                            return trim($val);
-                        }))
-                        : trim($matches['value']);
+        if (array_key_exists('geoipConfFile', $params)) {
+            if(is_file($params['geoipConfFile']) && is_readable($params['geoipConfFile'])) {
+                $confParams = array();
+                foreach (file($params['geoipConfFile']) as $line) {
+                    $confString = trim($line);
+                    if (preg_match('/^\s*(?P<name>LicenseKey|EditionIDs)\s+(?P<value>([\w-]+\s*)+)$/', $confString, $matches)) {
+                        $confParams[$matches['name']] = $matches['name'] === 'EditionIDs'
+                            ? array_values(array_filter(explode(' ', $matches['value']), function ($val) {
+                                return trim($val);
+                            }))
+                            : trim($matches['value']);
+                    }
                 }
+                $this->license_key = !empty($confParams['LicenseKey']) ? $confParams['LicenseKey'] : $this->license_key;
+                $this->editions = !empty($confParams['EditionIDs']) ? $confParams['EditionIDs'] : $this->editions;
             }
-            $this->license_key = !empty($confParams['LicenseKey']) ? $confParams['LicenseKey'] : $this->license_key;
-            $this->editions = !empty($confParams['EditionIDs']) ? $confParams['EditionIDs'] : $this->editions;
-        }
-        if(array_key_exists('geoipConfFile', $params))
+            else{
+                $this->errors[] = 'The geoipConfFile parameter was specified, but the file itself is missing or unreadable. See https://github.com/tronovav/geoip2-update';
+            }
             unset($params['geoipConfFile']);
+        }
     }
 
     /**
