@@ -129,8 +129,9 @@ class Client
             }
             $this->license_key = !empty($confParams['LicenseKey']) ? $confParams['LicenseKey'] : $this->license_key;
             $this->editions = !empty($confParams['EditionIDs']) ? $confParams['EditionIDs'] : $this->editions;
-            unset($params['geoipConfFile']);
         }
+        if(array_key_exists('geoipConfFile', $params))
+            unset($params['geoipConfFile']);
     }
 
     /**
