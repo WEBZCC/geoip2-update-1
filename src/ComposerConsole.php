@@ -54,7 +54,7 @@ class ComposerConsole extends Client
 
                 if ($download_size && !$progressBarFinish)
                     if ($downloaded < $download_size)
-                        $progressBar->setProgress(($downloaded / $download_size) * 100);
+                        $progressBar->setProgress(round(($downloaded / $download_size) * 100));
                     else {
                         $progressBar->finish();
                         $progressBarFinish = true;
