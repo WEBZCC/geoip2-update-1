@@ -43,6 +43,7 @@ class Client
      */
     public $dir;
 
+    protected $editionVersions = array();
     protected $urlApi = 'https://download.maxmind.com/app/geoip_download';
     protected $updated = array();
     protected $errors = array();
@@ -181,6 +182,8 @@ class Client
         $remoteFileLastModified = date_create($newFileRequestHeaders['last-modified'][0])->getTimestamp();
         $localFileLastModified = is_file($this->getEditionDirectory($editionId) . DIRECTORY_SEPARATOR . $this->lastModifiedStorageFileName) ?
             (int)file_get_contents($this->getEditionDirectory($editionId) . DIRECTORY_SEPARATOR . $this->lastModifiedStorageFileName) : 0;
+
+        $this->editionVersions[$editionId] = array($localFileLastModified,$remoteFileLastModified);
 
         if ($remoteFileLastModified !== $localFileLastModified) {
 

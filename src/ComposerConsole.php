@@ -25,8 +25,9 @@ class ComposerConsole extends Client
      */
     protected function download($editionId)
     {
+        $action = empty($this->editionVersions[$editionId][0]) ? 'Installing' : 'Updating';
         $progressBar = new ProgressBar((new ConsoleOutput()), 100);
-        $progressBar->setFormat("  - Upgrading $editionId: [%bar%] %percent:3s%%");
+        $progressBar->setFormat("  - $action <fg=green>$editionId</>: [%bar%] %percent:3s%%");
         $progressBar->setRedrawFrequency(1);
         $progressBar->start();
         $progressBarFinish = false;
